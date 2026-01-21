@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/api/mafia", async (req, res) => {
-  const prompt = req.body.prompt;
+  const messages = req.body.messages;
 
   const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
@@ -20,9 +20,7 @@ app.post("/api/mafia", async (req, res) => {
     },
     body: JSON.stringify({
       model: "llama-3.1-8b-instant",
-      messages: [
-        { role: "user", content: prompt }
-      ]
+      messages: messages
     })
   });
 
